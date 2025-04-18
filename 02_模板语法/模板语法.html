@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>模板语法</title>
+
+    <!-- 通过本地引入Vue.js -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+    <!-- 通过CDN引入Vue.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+
+<body>
+
+    <!-- 
+            Vue 模板语法有 2 大类:
+                1. 插值语法: 用于解析标签体内容, 将数据渲染到页面中
+                    - {{xxx}}: xxx 可以是 JS 表达式, 且 xxx 可以自动读取到 data 中的所有属性
+                2. 指令语法: 用于解析标签(包括:标签属性,标签体内容,绑定事件等等), 操作 DOM 元素. Vue 中的指令都是以 v- 开头的
+                    - v-bind: 用于绑定元素的属性. 语法: v-bind:属性名="表达式", 简写: :属性名="表达式"
+                    - v-on: 用于绑定元素的事件. 语法: v-on:事件名="表达式"
+                    - v-model: 用于表单元素双向数据绑定. 语法: v-model="data中的属性"
+                    - v-for: 用于循环遍历元素. 语法: v-for="item in data"
+                    - v-if: 用于判断是否渲染元素. 语法: v-if="表达式"
+                    - v-show: 用于判断是否显示元素. 语法: v-show="表达式"
+                    - v-text: 用于解析标签体内容, 将数据渲染到页面中. 语法: v-text="data中的属性"
+                    - v-html: 用于解析标签体内容, 将数据渲染到页面中. 语法: v-html="data中的属性"
+        -->
+
+
+    <!-- 创建 Vue 容器 -->
+    <div id="root">
+        <h1>插值语法</h1>
+        <h3>Hello, {{name}}</h3>
+        <hr>
+
+        <h1>指令语法</h1>
+        <a v-bind:href="url" title="hello">百度一下1</a>
+        <a :href="url.toUpperCase()">百度一下2</a>
+        <hr>
+
+        <h1>指令语法-层级嵌套</h1>
+        <a v-bind:href="search.url" title="hello">{{search.name}}搜索</a>
+        <a :href="search.url.toUpperCase()">{{search.name}}搜索</a>
+    </div>
+</body>
+
+<script type="text/javascript">
+    // 阻止 vue 在启动时生成生产提示
+    Vue.config.productionTip = false;
+
+    // 创建 Vue 实例, 容器和 Vue 实例一一对应
+    new Vue({
+        // el 选项用于指定当前 Vue 实例挂载到页面上的元素(为哪个容器服务), 可以是选择器字符串, 也可以是 DOM 元素
+        el: '#root',
+        // data 选项用于指定当前 Vue 实例中的数据, 数据供 el 所指定的容器去使用, 数据可以是对象, 也可以是函数
+        data: {
+            name: 'Vue!!!',
+            url: 'https://www.baidu.com',
+            search: {
+                name: '必应',
+                url: 'https://www.bing.com'
+            }
+        }
+    })
+</script>
+
+</html>
